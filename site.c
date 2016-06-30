@@ -24,12 +24,14 @@ int main(int argc, char *argv[]){
 	char buf[2048];
 	int fdimg;
 	int on		= 1;
-	int port	= 8081;
+	int port	= 80;
 	
 	fd_server = socket(AF_INET, SOCK_STREAM, 0);
 	if(fd_server<0){
 		perror("socket");
 		exit(1);
+	}else{
+		printf("Servidor Online.\n");
 	}
 	
 	setsockopt(fd_server, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(int));
@@ -52,11 +54,9 @@ int main(int argc, char *argv[]){
 	while(1){
 		fd_client = accept(fd_server, (struct sockaddr *) &client_addr, &sin_len);
 		if(fd_client==-1){
-			perror("Connection failed.\n");
+			perror("Falha na conexão.\n");
 			continue;
 		}
-		printf("Got client connection..");
-		
 		if(!fork()){
 			close(fd_server);
 			memset(buf, 0, 2048);
@@ -72,11 +72,9 @@ int main(int argc, char *argv[]){
 			}
 		
 			close(fd_client);
-			printf("Closing..\n");
 			exit(0);
 		}
 		close(fd_client);
 	}
-	
 	return 0;
 }
