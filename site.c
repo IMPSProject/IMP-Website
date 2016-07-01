@@ -1,12 +1,12 @@
 #include <kore/kore.h>
 #include <kore/http.h>
 
-int	page(struct http_request *);
+int page(struct http_request *);
 int page(struct http_request *req){
 	char hello[] = "<!DOCTYPE html>"
 			"<html>"
 				"<head>"
-						
+					
 				"</head>"
 				"<body>"
 					"IMPS"
