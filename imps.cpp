@@ -13,7 +13,7 @@ int main(){
 	// Home
 	CROW_ROUTE(app, "/")([](){
 		crow::mustache::context ctx;
-        return crow::mustache::load("home.html").render();
+		return crow::mustache::load("home.html").render();
 	});
 
 	// Lagertha
@@ -41,9 +41,9 @@ int main(){
 		auto x = crow::json::load(req.body);
 		if(!x) return crow::response(400);
 		int sum = x["a"].i()+x["b"].i();
-        std::ostringstream os;
-        os << sum;
-        return crow::response{os.str()};
+		std::ostringstream os;
+		os << sum;
+		return crow::response{os.str()};
 	});
 	
 	// Log
